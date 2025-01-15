@@ -33,14 +33,9 @@ for p = 1:length(datafolders)
     cprintf([0,1,0], "Step 2: Exporting EEG events from txt to a csv file\n", datapath)  
     allowed_event_files = {"Flow Events", "Klassifizierte Arousal", "Körperlage", "PLM Events", "Schlafprofil", "Schnarchen Events"};
     for event_file_type = allowed_event_files
+        keyboard
         f = cellfun(@(name) contains(name, event_file_type{1}), {datafiles.name});
-        % Check if given event file exists. If not, print an error and skip
-        % loop iteration
-        if ~any(f)
-            cprintf([1,0,0], "\tERROR! Could not find an events file: '%s'\n", event_file_type{1})
-            continue
-        end
-
+        
         events_file = fullfile(datafiles(f).folder, datafiles(f).name);
         if isfile(events_file)
             cprintf([0,1,0], "\tExporting '%s' events to csv\n", event_file_type{1})
