@@ -34,6 +34,7 @@ for p = 1:length(datafolders)
     allowed_event_files = {"Flow Events", "Klassifizierte Arousal", "Körperlage", "PLM Events", "Schlafprofil", "Schnarchen Events"};
     for event_file_type = allowed_event_files
         f = cellfun(@(name) contains(name, event_file_type{1}), {datafiles.name});
+        
         % Check if given event file exists. If not, print an error and skip
         % loop iteration
         if ~any(f)
