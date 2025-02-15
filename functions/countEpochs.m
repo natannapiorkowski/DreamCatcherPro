@@ -6,11 +6,15 @@ function epochNum = countEpochs(EEG, EEGevents)
 
     for i = {EEG.epoch.eventtype}
         if ~isempty(i{1})
-            events{end+1} = i{1}{1};
+            if ischar(i{1})
+                events{end+1} = i{1};
+            else
+                events{end+1} = i{1}{1};
+            end
         end
     end
 
-    
+
     for phase = 1:length(EEG.sleepPhases)
         currPhase = find(ismember(events, EEGevents{phase}));
         % count not nan epochs for each channel separately
